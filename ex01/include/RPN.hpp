@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaferna2 <jaferna2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/06 11:05:57 by jaferna2          #+#    #+#             */
-/*   Updated: 2025/08/06 15:52:15 by jaferna2         ###   ########.fr       */
+/*   Created: 2025/08/06 16:15:51 by jaferna2          #+#    #+#             */
+/*   Updated: 2025/08/06 16:45:35 by jaferna2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RPN_HPP
+# define RPN_HPP
+
 #include <iostream>
-#include <cstdlib>
-#include "include/BitcoinExchange.hpp"
+#include <sstream>
+#include <stack>
 
-int	main (int argc, char **argv)
+class RPN
 {
-	(void) argv;
-	if (argc != 2)
-	{
-		std::cerr << "Error: could not open file." << std::endl;
-		return (EXIT_FAILURE);
-	}
-	BitcoinExchange btc;
+	private:
+		std::stack<int> _stack;
 
-	btc.loadDatabase("data.csv");
-	btc.processInputFile(argv[1]);
-	return (EXIT_SUCCESS);
-}
+		bool isOperator(char c) const;
+		int applyOperator(char op, int a, int b) const;
+		
+	public:
+		RPN(void);
+		RPN(const RPN& other);
+		~RPN(void);
+
+		RPN& operator=(const RPN& other);
+		
+		void evaluate(const std::string& expression);
+};
+
+
+#endif 
