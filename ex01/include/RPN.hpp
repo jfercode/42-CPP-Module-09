@@ -6,7 +6,7 @@
 /*   By: jaferna2 <jaferna2@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:15:51 by jaferna2          #+#    #+#             */
-/*   Updated: 2025/08/06 16:45:35 by jaferna2         ###   ########.fr       */
+/*   Updated: 2025/08/06 17:07:19 by jaferna2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ class RPN
 		void evaluate(const std::string& expression);
 };
 
-
-#endif 
+#endif

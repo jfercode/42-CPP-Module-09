@@ -1,12 +1,12 @@
 # Static library name
-NAME		= ex02
+NAME		= PmergeMe
 
 # Compiler and flags
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 # Directories and files
-SRC			= main.cpp
+SRC			= main.cpp source/PmergeMe.cpp
 OBJ			= $(SRC:.cpp=.o)
 
 all:	$(NAME)
