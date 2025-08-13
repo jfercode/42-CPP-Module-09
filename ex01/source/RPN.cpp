@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaferna2 <jaferna2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jaferna2 < jaferna2@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:21:35 by jaferna2          #+#    #+#             */
-/*   Updated: 2025/08/06 16:55:04 by jaferna2         ###   ########.fr       */
+/*   Updated: 2025/08/13 10:06:51 by jaferna2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,26 +32,32 @@ bool	RPN::isOperator(char c) const
 
 int	RPN::applyOperator(char op, int a, int b) const
 {
-	int	result = 0;
+	long long	result = 0;
 	if (isOperator(op))
 	{
 		switch (op)
 		{
 			case '-':
-				result = a - b;
+				result = (long long)a - b;
 				break;
 			case '*':
-				result = a * b;
+				result = (long long)a * b;
 				break;
 			case '/':
-				result = a / b;
+				if (b == 0)
+            	    throw std::runtime_error("division by zero");
+            	if (a % b != 0)
+            	    throw std::runtime_error("non-integer division result");
+				result = (long long)a / b;
 				break;
 			default:
-				result = a + b;
+				result = (long long)a + b;
 				break;
 		}
+		if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
+			throw	std::runtime_error("integer overflow/underflow result");
 	}
-	return (result);
+	return (static_cast<int>(result));
 }
 
 void	RPN::evaluate(const std::string& expression)
@@ -60,6 +66,16 @@ void	RPN::evaluate(const std::string& expression)
 	std::string token;	
 	while (ss >> token)
 	{
+		if (token.length() != 1)
+		{
+			std::cerr << "Error: invalid parameter size => " << token << std::endl;
+			return;		
+		}
+		if (!isdigit(token[0]) && !isOperator(token[0]))
+		{
+			std::cerr << "Error: invalid parameter => " << token[0] << std::endl;
+			return;
+		}	
 		if (token.length() == 1 && isOperator(token[0]))
 		{
 			if (_stack.size() < 2)
@@ -69,11 +85,6 @@ void	RPN::evaluate(const std::string& expression)
 			}
 			int num02 = _stack.top(); _stack.pop();
 			int num01 = _stack.top(); _stack.pop();
-			if (token[0] == '/' && num02 == 0)
-			{
-				std::cerr << "Error: division by zero" << std::endl;
-				return;
-			}
 			int	result = applyOperator(token[0], num01, num02);
 			_stack.push(result);
 		}

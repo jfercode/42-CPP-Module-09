@@ -21,4 +21,11 @@ fclean:	clean
 
 re:	fclean all
 
-.PHONY: all clean fclean re
+MIN     ?= 1
+MAX     ?= 10000
+COUNT   ?= 3000
+
+random: 
+	./$(NAME) $(shell shuf -i $(MIN)-$(MAX) -n $(COUNT) | tr '\n' ' ')
+
+.PHONY: all clean fclean re random

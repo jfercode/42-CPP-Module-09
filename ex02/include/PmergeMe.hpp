@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaferna2 <jaferna2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jaferna2 < jaferna2@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:29:41 by jaferna2          #+#    #+#             */
-/*   Updated: 2025/08/07 11:27:34 by jaferna2         ###   ########.fr       */
+/*   Updated: 2025/08/13 11:01:58 by jaferna2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ class PmergeMe
 		
 		bool isValidNumber(const std::string& str);
 		void fillContainers(std::vector<std::string>& args);
-		void mergeInsertionSort(std::vector<int>& container);
-		void mergeInsertionSort(std::deque<int>& container);
-
-		template <typename T>
-		void insertionMergeSort(T& container);
+		void mergeInsertionSortV(std::vector<int>& container);
+		void mergeInsertionSortD(std::deque<int>& container);
 
 		template <typename T>
 		void printContainer(const std::string label, const T& container);

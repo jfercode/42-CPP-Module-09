@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaferna2 <jaferna2@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: jaferna2 < jaferna2@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 16:02:25 by jaferna2          #+#    #+#             */
-/*   Updated: 2025/08/06 16:53:27 by jaferna2         ###   ########.fr       */
+/*   Updated: 2025/08/13 09:56:34 by jaferna2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@ int	main (int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 
-	RPN rpn;
-	rpn.evaluate(argv[1]);
+	try
+	{
+		RPN rpn;
+		rpn.evaluate(argv[1]);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << "Error: " << e.what() << '\n';
+	}
 	return (EXIT_SUCCESS);
 }
